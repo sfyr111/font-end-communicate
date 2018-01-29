@@ -6,6 +6,14 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: '跨域通信' });
 });
 
+router.get('/a', function(req, res, next) {
+  res.render('a');
+});
+
+router.get('/b', function(req, res, next) {
+  res.render('b');
+});
+
 // 跨域限制
 router.get('/someurl', function(req, res, next) {
   res.send('somedata')
