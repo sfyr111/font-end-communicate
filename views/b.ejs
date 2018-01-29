@@ -8,12 +8,13 @@
     width: 200px;
   }
 </style>
-
+<h4>URL: http://b.yang.com:3000/b</h4>
 <input id="input" type="text"  placeholder="http://b.yang.com:3000/b">
 <script>
-  // URL: http://b.jrg.com:8080/b.html
+  // URL: http://b.yang.com:3000/b
 
   document.querySelector('#input').addEventListener('input', function(){
+    console.log(location.host, this.value);
     window.parent.document.querySelector('input').value = this.value;
   })
   document.domain = 'yang.com';

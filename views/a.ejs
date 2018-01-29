@@ -27,6 +27,7 @@
 <div class="ct">
   <h1>使用降域实现跨域</h1>
   <div class="main">
+    <h4>URL: http://a.yang.com:3000/a</h4>
     <input type="text" placeholder="http://a.yang.com:3000/a">
   </div>
 
@@ -36,9 +37,9 @@
 
 
 <script>
-  //URL: http://a.jrg.com:8080/a.html
+  //URL: http://a.yang.com:3000/a
   document.querySelector('.main input').addEventListener('input', function(){
-    console.log(this.value);
+    console.log(location.host, this.value);
     window.frames[0].document.querySelector('input').value = this.value;
   })
   document.domain = "yang.com"
