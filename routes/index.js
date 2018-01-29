@@ -29,12 +29,14 @@ router.get('/someurl', function(req, res, next) {
 
 // JSONP
 router.get('/jsonp', function(req, res, next) {
-  const { callback } = req.query
+  let { callback: cb } = req.query
   const data = {
     type: 'jsonp',
     data: 'data'
   }
-  res.send(callback + '(' + JSON.stringify(data) + ')')
+  cb = cb.replace(/\(/g, '');
+  cb = cb.replace(/\)/g, '');
+  res.send(cb + '(' + JSON.stringify(data) + ')')
 })
 
 // CORS
