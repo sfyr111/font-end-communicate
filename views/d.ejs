@@ -1,0 +1,26 @@
+<html>
+<style>
+  html,body{
+    margin: 0;
+  }
+  input{
+    margin: 20px;
+    width: 200px;
+  }
+</style>
+<h4>URL: http://b.yang.com:3000/d</h4>
+<input id="input" type="text"  placeholder="http://b.yang.com:3000/d">
+<script>
+  // URL: http://b.yang.com:3000/d
+  var input = document.querySelector('#input')
+  input.addEventListener('input', function(){
+    console.log('b.yang.com - input event value', this.value);
+    window.parent.postMessage(this.value, '*');
+  })
+  window.addEventListener('message',function(e) {
+    input.value = e.data
+    console.log('b.yang.com - message event value', e.data);
+  });
+
+</script>
+</html>

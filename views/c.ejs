@@ -1,0 +1,52 @@
+<html>
+<style>
+  .ct{
+    width: 910px;
+    margin: auto;
+  }
+  .main{
+    float: left;
+    width: 450px;
+    height: 300px;
+    border: 1px solid #ccc;
+  }
+  .main input{
+    margin: 20px;
+    width: 200px;
+  }
+  .iframe{
+    float: right;
+  }
+  iframe{
+    width: 450px;
+    height: 300px;
+    border: 1px dashed #ccc;
+  }
+</style>
+
+<div class="ct">
+  <h1>使用postMessage实现跨域</h1>
+  <div class="main">
+    <h4>URL: http://a.yang.com:3000/c</h4>
+    <input type="text" placeholder="http://a.yang.com:3000/c">
+  </div>
+
+  <iframe src="http://localhost:3000/d" frameborder="0" ></iframe>
+
+</div>
+
+
+<script>
+  //URL: http://a.yang.com:3000/c
+  var input = document.querySelector('.main input')
+  input.addEventListener('input', function(){
+    console.log('a.yang.com - input event value', this.value);
+    window.frames[0].postMessage(this.value,'*');
+  })
+  window.addEventListener('message',function(e) {
+    input.value = e.data
+    console.log('a.yang.com - message event value', e.data);
+  });
+
+</script>
+</html>

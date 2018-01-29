@@ -14,6 +14,14 @@ router.get('/b', function(req, res, next) {
   res.render('b');
 });
 
+router.get('/c', function(req, res, next) {
+  res.render('c');
+});
+
+router.get('/d', function(req, res, next) {
+  res.render('d');
+});
+
 // 跨域限制
 router.get('/someurl', function(req, res, next) {
   res.send('somedata')
