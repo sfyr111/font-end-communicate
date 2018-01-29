@@ -5,7 +5,68 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h3>跨域限制</h3>
+    <button id="noCross">跨域</button>
+    <script>
+      noCross.addEventListener('click', function() {
+        fetch('http://b.yang.com:3000/someurl/', {
+          method: 'get',
+        }).then(function (response) {
+          console.log(response)
+        }).catch(function (err) {
+          // 出错了，等价于 then 的第二个参数，但这样更好用更直观
+        });
+      })
+    </script>
+
+    <h3>JSONP</h3>
+    <button id="jsonp">JSONP</button>
+    <script>
+      jsonp.addEventListener('click', function() {
+        const script = document.createElement('script')
+        script.src = 'http://b.yang.com:3000/jsonp?callback=handleJsonp'
+        document.head.appendChild(script)
+//        document.head.removeChild(script)
+      })
+
+      function handleJsonp(data) {
+        console.log(data)
+      }
+    </script>
+
+    <h3>CORS</h3>
+    <button id="cors">cors</button>
+    <script>
+      cors.addEventListener('click', function() {
+        let reqHeaders = new Headers()
+        reqHeaders.append('Content-Type', 'application/x-www-form-urlencoded')
+        fetch('http://b.yang.com:3000/cors/', {
+          method: 'post',
+          headers: reqHeaders,
+          mode: 'cors',
+          body: 'post body'
+        }).then(function (response) {
+          console.log(response)
+        })
+      })
+    </script>
+
+    <h3>WebSocket</h3>
+    <button id="socket">socket</button>
+    <button id="sendmsg">send-msg</button>
+    <script>
+      var ws
+      socket.addEventListener('click', function() {
+//        ws = new WebSocket(`ws://${location.host}`)
+        ws = new WebSocket(`ws://b.yang.com:3000/`)
+        ws.onmessage = (data) => console.log(data);
+        ws.onerror = () => console.log('WebSocket error');
+        ws.onopen = () => console.log('WebSocket connection established');
+        ws.onclose = () => console.log('WebSocket connection closed');
+      })
+      sendmsg.addEventListener('click', function() {
+        ws.send('send a msg')
+      })
+    </script>
   </body>
 </html>
